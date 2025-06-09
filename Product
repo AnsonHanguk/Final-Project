@@ -1,0 +1,25 @@
+
+public class Product {
+String name;
+double price;
+int quant;
+
+public Product (String name, double price) {
+	this.name = name;
+	this.price = price;
+	this.quant = 0;
+}
+
+public void purchase(int amount) {
+	quant += amount;
+}
+public double getTotal() {
+	return price * quant;
+	
+}	
+public void receipt() {
+	if (quant>0) {
+		System.out.printf("%s x%d = $%.2f\n", name, quant, getTotal());
+	}
+	}
+}
