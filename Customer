@@ -1,0 +1,44 @@
+
+//Start by importing the tools needed for date, time and age in  the person class
+import java.time.LocalDate;
+	import java.time.format.DateTimeFormatter;
+
+//establish the class
+	
+public class Customer {
+	
+	//setting up the variables which contain the users data
+	String name;
+	String lastname;
+	String address ;
+	String phone;
+	String billinfo;
+
+	
+
+
+	public Customer(String name, String lastname, String adress, String phone, String billinfo) {
+	    this.name = name;
+	    this.lastname = lastname;
+	    this.address = adress;
+	    this.phone = phone;
+	    this.billinfo = billinfo;
+
+	}
+
+
+//Lastly the user information will be printed with the printInfo method established in the main
+
+	public void printInfo() { //reference to the method in main class
+	
+		System.out.println("-------User: " + name+" "+ lastname + " Info-------");
+		System.out.println("Last Name: " + lastname);
+		System.out.println("First Name: " + name);
+		System.out.println("Address: " + address);
+		System.out.println("Phone: " + phone);
+		System.out.println("Billing info " + billinfo);
+		//program should have neatly printed the users information
+	}
+
+}
+//end
