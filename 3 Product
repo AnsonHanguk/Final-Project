@@ -1,0 +1,35 @@
+
+//Product class stores information and public methods to be used throughout the program
+
+//sets up the product class
+public class Product {
+	
+	//variables that are needed for the methods to work like receipt 
+String name;
+double price;
+int quant;
+  Product (String name, double price) {
+	this.name = name;
+	this.price = price;
+	this.quant = 0;
+}
+//create a method that allows user to purchase as much of the item as they would like and does math
+public void purchase(int amount) {
+	quant += amount;
+}
+
+//this public method creates the total price by doing price times quantity 
+public double getTotal() {
+	return price * quant;
+	
+}	
+
+// the last method is the receipt which uses a formater 
+//this print the name of the item, how much they orderd and puts the total price (get total the last method) into 
+//a neat looking receipt
+public void receipt() {
+	if (quant>0) {
+		System.out.printf("%s x%d = $%.2f\n", name, quant, getTotal());
+	}
+	}
+}
