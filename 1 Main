@@ -1,11 +1,18 @@
-// Anson Final (Creating Two Classes for User Information)
+// Anson Final (Paper SHop)
 // Auther: Anson
 // Class: CS161 Spring 2025
-// 06/08/2025
+// 06/11/2025
 // Java program that allows user to enter data, save profile , and purchase paper with total calculaion 
 
 
 /*
+ * Based on the functional requirements outlined in our CS161 Final Project paper, the core of this program will be to: 
+
+1. Have a system which can create/save users
+2. Save user information
+3. Sell paper listed on assignment paper
+4. Calculate how much total cost will be and provide user a bill
+
 Program starts and java.io and utill scanner are imported for use in program
 program creates a file direcrtory for saved user information
 then program establishes the variables for each product needed for the program
@@ -16,7 +23,7 @@ Then program asks for name
 If name matches saved user information, they skip to the shop part of the program.
 
 If not, they set up acount with all requierd data listed in the group specification 
-
+ 	
 When all information is enterd, user is saved to usersinfo.txt and person1 is created in person class 
 
 user now clicks enter to open the shop
@@ -29,6 +36,15 @@ they can then type how many sets of paper they would like to buy
 
 finaly the system creates a receipt with final math calculation
  */
+
+
+
+
+
+//---------------------------------------------------------------------
+
+//Program start
+
 
 //import java.io so system can read data stored on computer
 import java.io.* ; 
@@ -45,7 +61,7 @@ public class Main {
 	
 	public static void main(String[]args) {
 	
-//bring scanner in
+//bring scanner in to allow user input
 Scanner input = new Scanner(System.in);  
 
 
@@ -59,10 +75,14 @@ Scanner input = new Scanner(System.in);
 
 Product p1 = new Product ("Hammermill Paper", 31.99); 
 Product p2 = new Product ("True Red Paper", 55.99);
-Product p3 = new Product ("Domtar Paper", 59.29);
+Product p3  = new Product ("Domtar Paper", 59.29);
 
 //set up the varibales needed for user outlined in req def
 String name, lastname, address, billinfo, phone;
+
+//------------------------------------------------------------------------------
+
+//Setting up acount 
 
 //ask for first name
 System.out.println ("Enter your first name");
@@ -78,19 +98,21 @@ if(customerexists(name)) {
 //user does no match. Create a new profile
 	System.out.println("Thank you for joining our paper shop, we will aks you for a little more information");
 	
+	//If the user data is not matched with saved data in the txt file the user wil break into this long else loop that sets up thier profile and information
+	
+	//saves users last name
 	System.out.println ("Enter your last name");
 	 lastname = input.nextLine();
+	 
+	 //saves users adsress
 	
 		System.out.println ( "Enter Address");
-	
 	address = input.nextLine();
-
+//saves users billing info 
 	System.out.println ( "Enter Billing Info (random numbers for a joke)");
-
 	billinfo = input.nextLine();
-
+//phone number
 	System.out.println ( "Enter Phone Number (random numbers for a joke)");
-
 	phone = input.nextLine();
 
 	//set up an object, person1 and cary the four variables into the customer class to be used later in the program
@@ -99,35 +121,53 @@ if(customerexists(name)) {
 	//create customer with enterd user data from scanner 
 	Customer customer1 = new Customer(name, lastname, address, phone, billinfo);
 	customer1.printInfo();
-	//also use method savedcustomer to save data
+	//also use method savedcustomer to save data to adress later
 	SavedCustomer(customer1);
-	}
+	} 
 		
 	
-		
+		//after else loop, now saved user or recently saved user (if they were just new) can purchase items
+
+
+
+//------------------------------------------------------------------------------------------------
+//Buying products
+
 // print all shop information (products to buy)
+
+//each product p1, p2, and p3 exist as a public prodcuct meaning I can reference thier data from the class
+//to this main document 
 		
+
+//print out all items user can buy 
 		System.out.println ("Welecome to Our Paper Shop Take a Look at the Avavable Products");
 		System.out.println("1." + p1.name +"$"+ p1.price );
 		System.out.println("2." + p2.name +"$"+ p2.price );
 		System.out.println("3." + p3.name +"$"+ p3.price );
 		
 		
-		
-		
-			System.out.println("Enter product number 1, 2 or 3, or type Checkout to finish!");
+		//
+		//gives instructions
+			System.out.println("Enter product number 1, 2 or 3 to buy");
+			
+			//I set up a variable named choice and set it equal to the next line that the user writes
+			//this allows the program to look at the input and see if it matches 1, 2 or 3. 
 			String choice = input.nextLine();
 			
+			
+			//This checks to see if the choice is 1. If it is one the systemn will know it is refrencing product 1
 			if(choice.equals("1")) {
 				System.out.println ("how many sets of Hammermil paper would you like?");
 				int qty = Integer.parseInt(input.nextLine());
 				p1.purchase(qty);
 				
+				//same as above
 			} else if(choice.equals("2")) {
 					System.out.println ("how many sets of True Red paper would you like?");
 					int qty = Integer.parseInt(input.nextLine());
 					p2.purchase(qty);
 					
+					//same as above
 			} else if(choice.equals("3")) {
 				System.out.println ("how many sets of Domtar Paper would you like");
 				int qty = Integer.parseInt(input.nextLine());
@@ -136,31 +176,29 @@ if(customerexists(name)) {
 			
 		}
 		
+			
+			//Lastly, the system creates a receipt by refrencing information stored in the product class
 			System.out.println ("Todays Receipt");
 			p1.receipt();
 			p2.receipt();
 			p3.receipt();
 			double total = p1.getTotal()+p2.getTotal()+ p3.getTotal();
-			System.out.printf ("Total: $%.2f%n", total);
-	
-	
-		
+			System.out.printf ("Total: $%.2f%n", total);	
 		
 	}
+//-------------------------------------------------------------------------------------------------------
+//SAVING DATA
 
 
+	//Declaration of the previously used customer exists method
 
-
-
-
-
-
-	
 private static boolean customerexists(String name) {
-	try (BufferedReader reader = new BufferedReader(new FileReader(SavedUsers))){
+	
+	//this references java i.o allowing the system to read data on files across the computer
+	try (BufferedReader reader = new BufferedReader(new FileReader(SavedUsers))){ // bufferedreader reads the data in the SavedUSers file
 		String line;
 		while ((line = reader.readLine()) !=null){
-			if (line.trim().equalsIgnoreCase(name)){
+			if (line.trim().equalsIgnoreCase(name)){ //reads the lines
 				return true;
 			}
 		reader.readLine();
@@ -170,11 +208,13 @@ private static boolean customerexists(String name) {
 		
 	}
 	
-	return false;
+	return false; //if there is an error the system wont crash 
 }
 
 	  
+//refrences public method for the customer class
 
+//this last part of the program writes the users data (customer.java) into the SavedUsers file so it can be used when logging int again
 	public static void SavedCustomer(Customer customer1) {
 	        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SavedUsers, true))) {
 	            writer.write(customer1.name);
@@ -184,7 +224,7 @@ private static boolean customerexists(String name) {
 	            writer.write(customer1.address +", "+ customer1.phone +", "+ customer1.billinfo);
 	            writer.newLine();
 	        } catch (IOException e) {
-	            System.out.println("Error saving user.");
+	            System.out.println("Error saving user."); //if there is an error fidning the file when the user inputs infromation it will break and print error saving user
 	            e.printStackTrace();
 	        }
 
