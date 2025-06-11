@@ -13,12 +13,11 @@
 3. Sell paper listed on assignment paper
 4. Calculate how much total cost will be and provide user a bill
 
-Program starts and java.io and utill scanner are imported for use in program
+Program starts: java.io and utill scanner are imported for use in program.
 program creates a file direcrtory for saved user information
-then program establishes the variables for each product needed for the program
-initilize the varibles outlined in method specfiication 
-
-Then program asks for name
+then program initilizes the varibles outlined in method specfiication 
+----------------------------
+Program asks for name
 
 If name matches saved user information, they skip to the shop part of the program.
 
