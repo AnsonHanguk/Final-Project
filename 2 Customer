@@ -1,13 +1,10 @@
 
-//Start by importing the tools needed for date, time and age in  the person class
-import java.time.LocalDate;
-	import java.time.format.DateTimeFormatter;
 
 //establish the class
 	
 public class Customer {
 	
-	//setting up the variables which contain the users data
+	//setting up the variables which contain the customers data
 	String name;
 	String lastname;
 	String address ;
@@ -16,7 +13,7 @@ public class Customer {
 
 	
 
-
+//making the class public and allows cross reference
 	public Customer(String name, String lastname, String adress, String phone, String billinfo) {
 	    this.name = name;
 	    this.lastname = lastname;
@@ -27,8 +24,8 @@ public class Customer {
 	}
 
 
-//Lastly the user information will be printed with the printInfo method established in the main
-
+//This method prints all users data enterd in main and ensures the data is also within the person class. 
+	//This is also the exact area in the class I have the BufferedWriter write into the file to be stored on the computer
 	public void printInfo() { //reference to the method in main class
 	
 		System.out.println("-------User: " + name+" "+ lastname + " Info-------");
@@ -37,7 +34,7 @@ public class Customer {
 		System.out.println("Address: " + address);
 		System.out.println("Phone: " + phone);
 		System.out.println("Billing info " + billinfo);
-		//program should have neatly printed the users information
+		//program should have neatly printed the users information and the main class should have saved it in a txt file
 	}
 
 }
